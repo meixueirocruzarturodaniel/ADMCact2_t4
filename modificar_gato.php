@@ -109,7 +109,7 @@ $sql = $conexion->query("SELECT * FROM gatos WHERE id_gato = $id");
 
             <?php }
             ?>
-            <button type="submit" class="btn btn-primary w-100 mt-3" name="btnregistrar" value="ok">Actualizar Gato</button>
+          <button type="submit" class="btn btn-primary w-100 mt-3" name="btnmodificar" value="ok">Actualizar Gato</button>
             <a href="index.php" class="btn btn-secondary w-100 mt-2">Cancelar y Volver</a>
         </form>
     </div>

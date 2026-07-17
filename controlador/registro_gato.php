@@ -13,18 +13,57 @@ if (!empty($_POST["btnregistrar"])) {
         if (isset($_FILES["imagen"]) && $_FILES["imagen"]["error"] == UPLOAD_ERR_OK) {
             $nombre_imagen = time() . "_" . $_FILES["imagen"]["name"];
             $ruta_temporal = $_FILES["imagen"]["tmp_name"];
-            move_uploaded_file($ruta_temporal, "imagenes/" . $nombre_imagen);
+            move_uploaded_file($ruta_temporal, "imagenes/" . $nombre_imagen); 
         }
 
         $sql = $conexion->query("INSERT INTO gatos(nombre, raza, edad, color, peso, imagen) VALUES ('$nombre', '$raza', $edad, '$color', $peso, '$nombre_imagen')");
         
         if ($sql == 1) {
-            echo '<div class="alert alert-success">Gato registrado correctamente</div>';
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({ 
+                        icon: 'success', 
+                        title: '¡Registrado!', 
+                        text: 'Gato registrado correctamente', 
+                        background: '#212121', 
+                        color: '#f1f1f1', 
+                        showConfirmButton: false, 
+                        timer: 1500 
+                    }).then(() => {
+                        window.location.href = 'index.php';
+                    });
+                });
+            </script>";
         } else {
-            echo '<div class="alert alert-danger">Error al registrar al gato</div>';
+            echo "<script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    Swal.fire({ 
+                        icon: 'error', 
+                        title: 'Error', 
+                        text: 'No se pudo registrar al gato', 
+                        background: '#212121', 
+                        color: '#f1f1f1', 
+                        showConfirmButton: false, 
+                        timer: 1500 
+                    }).then(() => {
+                        window.location.href = 'index.php';
+                    });
+                });
+            </script>";
         }
     } else {
-        echo '<div class="alert alert-warning">Alguno de los campos obligatorios está vacío</div>';
+        echo "<script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({ 
+                    icon: 'warning', 
+                    title: 'Atención', 
+                    text: 'Alguno de los campos obligatorios está vacío', 
+                    background: '#212121', 
+                    color: '#f1f1f1', 
+                    confirmButtonColor: '#3ea6ff' 
+                });
+            });
+        </script>";
     }
 }
 ?>
